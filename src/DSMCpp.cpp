@@ -1,6 +1,8 @@
 #include <iostream>
+#include <matrix.h>
 
 using namespace std;
+using namespace DSMCpp;
 
 int main() {
 
