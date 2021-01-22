@@ -1,13 +1,11 @@
 #include <iostream>
-#include <matrix.h>
+#include <log.h>
 
 using namespace std;
 using namespace DSMCpp;
 
 int main() {
-
-
-    cout << "Starting DSMCpp" << endl;
+    Log::print("Starting DSMCpp");
 
     return 0;
 }
