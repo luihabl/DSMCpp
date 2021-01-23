@@ -10,6 +10,8 @@ add_executable(DSMCpp
 
     src/DSMCpp.cpp 
     src/log.cpp
+    src/rand.cpp
+    src/species.cpp
 
 )
 
