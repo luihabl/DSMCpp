@@ -5,6 +5,6 @@
 
 using namespace DSMCpp;
 
-Simulation::Simulation() {
-    par = Parameters();
+Simulation::Simulation(Parameters * _par) {
+    par = _par;
 }

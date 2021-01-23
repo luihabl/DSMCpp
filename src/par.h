@@ -5,7 +5,7 @@
 namespace DSMCpp {
     struct Parameters {
 
-        Parameters(){ };
+        Parameters() = default;
 
         // Geometry
         double lx = 0.1;

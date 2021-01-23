@@ -6,10 +6,10 @@ namespace DSMCpp {
     class Simulation {
 
         public:
-            Simulation();
+            Simulation(Parameters * _par);
 
         private:
-            Parameters par;
+            Parameters * par;
 
     };
 }
