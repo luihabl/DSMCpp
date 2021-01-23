@@ -1,10 +1,11 @@
-#pragma once
+#pragma once 
+
 
 // TODO: Set parameters from a config file
 namespace DSMCpp {
     struct Parameters {
 
-        Parameters();
+        Parameters(){ };
 
         // Geometry
         double lx = 0.1;
@@ -18,7 +19,5 @@ namespace DSMCpp {
 
         //Species
         double mass = 2.1801714e-25;
-
-
     };
 }

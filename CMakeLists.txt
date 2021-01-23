@@ -12,6 +12,7 @@ add_executable(DSMCpp
     src/log.cpp
     src/rand.cpp
     src/species.cpp
+    src/simulation.cpp
 
 )
 
