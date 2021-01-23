@@ -7,9 +7,12 @@ namespace DSMCpp {
 
         public:
             Simulation(Parameters * _par);
+            void run();
 
         private:
             Parameters * par;
+
+            int step;
 
     };
 }

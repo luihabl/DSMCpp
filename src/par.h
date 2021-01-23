@@ -16,6 +16,7 @@ namespace DSMCpp {
         int nx = 10;
         int ny = 10;
         int np_max = 1e5;
+        int n_steps = 1e3;
 
         //Species
         double mass = 2.1801714e-25;
