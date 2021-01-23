@@ -17,6 +17,11 @@ double Random::rand(){
     return uniform(gen); 
 }
 
+double Random::rand(double v0, double v1){
+    return (v1 - v0) * uniform(gen) + v0; 
+}
+
+
 double Random::randn(){
     return normal(gen);
 }
