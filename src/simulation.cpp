@@ -10,6 +10,11 @@ Simulation::Simulation(Parameters * _par) {
     par = _par;
 }
 
+void Simulation::setup(){
+
+    
+}
+
 void Simulation::run() {
     for(step=0; step < par->n_steps; step++) {
         Log::print("step " + std::to_string(step));

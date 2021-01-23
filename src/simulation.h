@@ -8,6 +8,7 @@ namespace DSMCpp {
         public:
             Simulation(Parameters * _par);
             void run();
+            void setup();
 
         private:
             Parameters * par;
