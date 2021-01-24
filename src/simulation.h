@@ -3,6 +3,7 @@
 #include <par.h>
 #include <species.h>
 #include <bound.h>
+#include <mesh.h> 
 
 namespace DSMCpp {
     class Simulation {
@@ -16,6 +17,7 @@ namespace DSMCpp {
         private:
             Parameters * par;
             Species s;
+            Mesh mesh;
             Boundaries bound;
 
             int step;

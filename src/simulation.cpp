@@ -12,14 +12,14 @@ Simulation::Simulation(Parameters * _par) {
 }
 
 void Simulation::setup() {
-    
     step = 0;
 
-    //Add TMatrix<Species> afterwards
-    s = Species(par);
+    s = Species(par); //Add TMatrix<Species> afterwards
     s.add_n_uniform_maxwellian(par->np_add, par->temperature);
-
+    
     bound = Boundaries(par);
+    
+    mesh = Mesh(par);
 }
 
 void Simulation::run() {

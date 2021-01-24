@@ -20,6 +20,7 @@ namespace DSMCpp {
 
         //Species
         double mass = 2.1801714e-25;
+        double sigma = 2 * 2.16e-10;
         int np_add = 1e4;
         double temperature = 300;
         double pw = 1e5;

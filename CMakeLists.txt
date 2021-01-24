@@ -15,6 +15,7 @@ add_executable(DSMCpp
     src/species.cpp
     src/simulation.cpp
     src/bound.cpp
+    src/mesh.cpp
 
 )
 
