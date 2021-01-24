@@ -16,6 +16,7 @@ add_executable(DSMCpp
     src/simulation.cpp
     src/bound.cpp
     src/mesh.cpp
+    src/coll.cpp
 
 )
 

@@ -26,6 +26,10 @@ void Simulation::run() {
 
 void Simulation::iterate() {
     s.move();
+
+    //Particle collisions
+
+
     bound.collisions(&s);
     step += 1;
 }
