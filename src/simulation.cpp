@@ -10,15 +10,24 @@ Simulation::Simulation(Parameters * _par) {
     par = _par;
 }
 
-void Simulation::setup(){
-
+void Simulation::setup() {
     
+    step = 0;
+
+    //Add TMatrix<Species> afterwards
+    s = Species(par);
+    s.add_n_uniform_maxwellian(par->np_add, par->temperature);
 }
 
 void Simulation::run() {
-    for(step=0; step < par->n_steps; step++) {
-        Log::print("step " + std::to_string(step));
-        
+    Log::print("Starting main loop");
+    while(step < par->n_steps) iterate();
+    Log::print("Finished main loop");   
+}
 
-    }
+void Simulation::iterate() {
+    s.move();
+
+    
+    step += 1;
 }

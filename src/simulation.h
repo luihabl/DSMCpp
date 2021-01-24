@@ -1,6 +1,7 @@
 #pragma once 
 
 #include <par.h>
+#include <species.h>
 
 namespace DSMCpp {
     class Simulation {
@@ -9,6 +10,9 @@ namespace DSMCpp {
             Simulation(Parameters * _par);
             void run();
             void setup();
+            void iterate();
+
+            Species s;
 
         private:
             Parameters * par;

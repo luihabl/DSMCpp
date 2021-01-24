@@ -11,6 +11,7 @@ int main() {
     Parameters par;    
     Simulation sim(&par);
 
+    sim.setup();
     sim.run();
 
     return 0;

@@ -12,6 +12,7 @@ Species::Species(Parameters * _par) {
 	par = _par;
 
     mass = par->mass;
+	pw = par->pw;
     np = 0;
 
     x  = DoubleMat::zeros(par->np_max);
@@ -28,7 +29,7 @@ void Species::add_n_uniform_uniform(int n, double vmin, double vmax) {
 	double lx = par->lx;
 	double ly = par->ly;
 
-	for (size_t i = np; i < np + n; i++)
+	for (int i = np; i < np + n; i++)
 	{
 		x.m[i]  = lx * Random::rand();
 		y.m[i]  = ly * Random::rand();
@@ -46,7 +47,7 @@ void Species::add_n_uniform_maxwellian(int n, double temperature) {
 	double lx = par->lx;
 	double ly = par->ly;
 
-	for (size_t i = np; i < np + n; i++)
+	for (int i = np; i < np + n; i++)
 	{
 		x.m[i]  = lx * Random::rand();
 		y.m[i]  = ly * Random::rand();
@@ -56,4 +57,12 @@ void Species::add_n_uniform_maxwellian(int n, double temperature) {
 		vz.m[i] = Random::randn(0.0, v_temperature);
 	}
 	np += n;
+}
+
+void Species::move() {
+	double dt = par->dt;
+	for (int i = 0; i < np; i++) {
+		x.m[i] = x.m[i] + dt * vx.m[i];
+		y.m[i] = y.m[i] + dt * vy.m[i];
+	}
 }
