@@ -18,6 +18,8 @@ void Simulation::setup() {
     //Add TMatrix<Species> afterwards
     s = Species(par);
     s.add_n_uniform_maxwellian(par->np_add, par->temperature);
+
+    bound = Boundaries(par);
 }
 
 void Simulation::run() {
@@ -28,7 +30,6 @@ void Simulation::run() {
 
 void Simulation::iterate() {
     s.move();
-
-
+    bound.collisions(&s);
     step += 1;
 }

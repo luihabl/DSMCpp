@@ -2,6 +2,7 @@
 
 #include <par.h>
 #include <species.h>
+#include <bound.h>
 
 namespace DSMCpp {
     class Simulation {
@@ -12,10 +13,10 @@ namespace DSMCpp {
             void setup();
             void iterate();
 
-            Species s;
-
         private:
             Parameters * par;
+            Species s;
+            Boundaries bound;
 
             int step;
 
