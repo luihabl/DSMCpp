@@ -3,6 +3,7 @@
 #include <string>
 #include <log.h>
 #include <par.h>
+#include <bound.h>
 
 using namespace DSMCpp;
 
@@ -28,6 +29,6 @@ void Simulation::run() {
 void Simulation::iterate() {
     s.move();
 
-    
+
     step += 1;
 }
