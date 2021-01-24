@@ -11,6 +11,7 @@ namespace DSMCpp {
             Boundaries(Parameters * _par) {par = _par;}
             void collisions(Species * s);
             void collisions_outer_walls(Species * s);
+            void specular_reflection(Species * s, int index, int nbound, double lbound);
         
         private:
             Parameters * par;
