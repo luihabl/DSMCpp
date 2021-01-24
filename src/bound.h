@@ -5,15 +5,11 @@
 
 // the Boundaries class will hold all the boundary geometry in the future
 namespace DSMCpp {
-    class Boundaries {
+    class Boundaries : public ParametricObj{
         public:
-            Boundaries() = default;
-            Boundaries(Parameters * _par) {par = _par;}
+            using ParametricObj::ParametricObj;
             void collisions(Species * s);
             void collisions_outer_walls(Species * s);
             void specular_reflection(Species * s, int index, int nbound, double lbound);
-        
-        private:
-            Parameters * par;
     };
 }

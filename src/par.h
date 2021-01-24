@@ -25,4 +25,12 @@ namespace DSMCpp {
         double temperature = 300;
         double pw = 1e5;
     };
+
+    class ParametricObj {
+        public:
+            ParametricObj() = default;
+            ParametricObj(Parameters * _par) {par = _par;}
+        protected:
+            Parameters * par;
+    };
 }

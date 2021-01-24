@@ -4,7 +4,7 @@
 #include <matrix.h>
 
 namespace DSMCpp {
-    class Mesh {
+    class Mesh : public ParametricObj {
         public:
             Mesh() = default;
             Mesh(Parameters * _par);
@@ -13,8 +13,5 @@ namespace DSMCpp {
             int nx, ny, lx, ly, dx, dy;
             double volume;
             DoubleMat x, y;
-
-        private:
-            Parameters * par;
     };
 }

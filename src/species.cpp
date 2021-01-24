@@ -7,10 +7,8 @@
 
 using namespace DSMCpp;
 
-Species::Species(Parameters * _par) {
-
-	par = _par;
-
+Species::Species(Parameters * _par) : ParametricObj(_par) {
+	
     mass = par->mass;
 	pw = par->pw;
     np = 0;

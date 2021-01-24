@@ -4,7 +4,7 @@
 #include <par.h>
 
 namespace DSMCpp {
-    class Species {
+    class Species : ParametricObj {
 
         public:
 
@@ -21,8 +21,5 @@ namespace DSMCpp {
             
             DoubleMat x, y, z;
             DoubleMat vx, vy, vz;
-
-        private:
-            Parameters * par;
     };
 }

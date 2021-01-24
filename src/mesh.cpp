@@ -4,7 +4,7 @@
 
 using namespace DSMCpp;
 
-Mesh::Mesh(Parameters * _par) {
+Mesh::Mesh(Parameters * _par) : ParametricObj(_par) {
     par = _par;
     nx = par->nx;
     ny = par->ny;

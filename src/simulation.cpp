@@ -7,10 +7,6 @@
 
 using namespace DSMCpp;
 
-Simulation::Simulation(Parameters * _par) {
-    par = _par;
-}
-
 void Simulation::setup() {
     step = 0;
 
