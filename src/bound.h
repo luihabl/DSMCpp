@@ -5,7 +5,7 @@
 
 // the Boundaries class will hold all the boundary geometry in the future
 namespace DSMCpp {
-    class Boundaries : public ParametricObj{
+    class BoundaryHandler : public ParametricObj{
         public:
             using ParametricObj::ParametricObj;
             void collisions(Species * s);

@@ -4,7 +4,7 @@
 #include <species.h>
 #include <bound.h>
 #include <mesh.h> 
-#include <iostream>
+#include <coll.h>
 
 namespace DSMCpp {
     class Simulation : public ParametricObj {
@@ -19,7 +19,8 @@ namespace DSMCpp {
         private:
             Species s;
             Mesh mesh;
-            Boundaries bound;
+            BoundaryHandler bound;
+            CollisionHandler coll;
             int step;
     };
 }

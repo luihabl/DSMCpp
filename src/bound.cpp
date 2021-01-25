@@ -2,12 +2,12 @@
 
 using namespace DSMCpp;
 
-void Boundaries::collisions(Species * s) {
+void BoundaryHandler::collisions(Species * s) {
     // Other boundary methods will be added here in the future
     collisions_outer_walls(s);
 }
 
-void Boundaries::collisions_outer_walls(Species * s) {
+void BoundaryHandler::collisions_outer_walls(Species * s) {
     double x, y;
     double lx = par->lx;
     double ly = par->ly;
@@ -35,7 +35,7 @@ void Boundaries::collisions_outer_walls(Species * s) {
     }
 }
 
-void Boundaries::specular_reflection(Species * s, int index, int nbound, double lbound) {
+void BoundaryHandler::specular_reflection(Species * s, int index, int nbound, double lbound) {
     // Boundary number: 0: x, 1: y
 
 	switch(nbound){

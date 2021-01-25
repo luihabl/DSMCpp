@@ -4,6 +4,7 @@
 #include <log.h>
 #include <par.h>
 #include <bound.h>
+#include <coll.h>
 
 using namespace DSMCpp;
 
@@ -13,9 +14,11 @@ void Simulation::setup() {
     s = Species(par); //Add TMatrix<Species> afterwards
     s.add_n_uniform_maxwellian(par->np_add, par->temperature);
     
-    bound = Boundaries(par);
+    bound = BoundaryHandler(par);
     
     mesh = Mesh(par);
+
+    coll = CollisionHandler(par);
 }
 
 void Simulation::run() {
@@ -26,9 +29,9 @@ void Simulation::run() {
 
 void Simulation::iterate() {
     s.move();
-
+    
     //Particle collisions
-
+    coll.update_map(&s);
 
     bound.collisions(&s);
     step += 1;
