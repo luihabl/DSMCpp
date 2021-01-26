@@ -2,7 +2,7 @@
 
 using namespace DSMCpp;
 
-void BoundaryHandler::collisions(Species * s) {
+void BoundaryHandler::collide(Species * s) {
     // Other boundary methods will be added here in the future
     collisions_outer_walls(s);
 }

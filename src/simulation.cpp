@@ -31,8 +31,7 @@ void Simulation::iterate() {
     s.move();
     
     //Particle collisions
-    coll.update_map(&s);
-
-    bound.collisions(&s);
+    coll.collide(&s);
+    bound.collide(&s);
     step += 1;
 }

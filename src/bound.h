@@ -8,7 +8,7 @@ namespace DSMCpp {
     class BoundaryHandler : public ParametricObj{
         public:
             using ParametricObj::ParametricObj;
-            void collisions(Species * s);
+            void collide(Species * s);
             void collisions_outer_walls(Species * s);
             void specular_reflection(Species * s, int index, int nbound, double lbound);
     };

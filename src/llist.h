@@ -14,7 +14,6 @@ namespace DSMCpp {
             tail = nullptr;
             size = 0;
         }
-
         
         Node * head;
         Node * tail;
@@ -33,6 +32,12 @@ namespace DSMCpp {
                 tail = tail->next;
             }
             size += 1;
+        }
+
+        T get(int index) const {
+            Node * n = head;
+            for (int i=0; i<=index; i++) n = n->next;
+            return n->data;
         }
 
         ~LinkedList() {
