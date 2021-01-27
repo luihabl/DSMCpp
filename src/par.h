@@ -16,13 +16,13 @@ namespace DSMCpp {
         double dy = ly / ((double)ny - 1);
         
         //Time
-        double dt = 1e-5;
-        int n_steps = 1;
+        double dt = 1e-7;
+        int n_steps = 1e5;
 
         //Species
         double mass = 2.1801714e-25;
         double sigma = 2 * 2.16e-10;
-        int np_add = 100;
+        int np_add = 1e3;
         int np_max = 1e5;
         double temperature = 300;
         double pw = 1e5;

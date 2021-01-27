@@ -16,6 +16,7 @@ namespace DSMCpp {
         
         private:
             void ntc_collisions(Species * s);
+            void isotropic_elastic_scattering(Species * s, int p1_index, int p2_index, double vr);
 
             double sigma_vr_max;
     };

@@ -5,6 +5,7 @@
 #include <par.h>
 #include <bound.h>
 #include <coll.h>
+#include <iostream>
 
 using namespace DSMCpp;
 
@@ -25,13 +26,21 @@ void Simulation::run() {
     Log::print("Starting main loop");
     while(step < par->n_steps) iterate();
     Log::print("Finished main loop");   
+
+    for (auto const& cell : s.cmap) {
+        cout << cell.first << ": ";
+        for (IntNode * n = cell.second.head; n != nullptr; n=n->next) {
+            
+            std::cout << n->data << " ";
+        }
+        std::cout << std::endl;
+    }
+
 }
 
 void Simulation::iterate() {
     s.move();
-    
-    //Particle collisions
-    coll.collide(&s);
     bound.collide(&s);
+    coll.collide(&s);
     step += 1;
 }
