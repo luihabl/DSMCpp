@@ -36,7 +36,7 @@ namespace DSMCpp {
 
         T get(int index) const {
             Node * n = head;
-            for (int i=0; i<=index; i++) n = n->next;
+            for (int i=0; i<index; i++) n = n->next;
             return n->data;
         }
 

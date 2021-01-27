@@ -17,7 +17,7 @@ namespace DSMCpp {
         
         //Time
         double dt = 1e-7;
-        int n_steps = 1e5;
+        int n_steps = 100;
 
         //Species
         double mass = 2.1801714e-25;
@@ -25,7 +25,7 @@ namespace DSMCpp {
         int np_add = 1e3;
         int np_max = 1e5;
         double temperature = 300;
-        double pw = 1e5;
+        double pw = 1e8;
     };
 
     class ParametricObj {
