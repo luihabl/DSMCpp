@@ -1,31 +1,41 @@
 #pragma once 
 
 
+#define PAR_LOAD_ALL \
+    PAR_LOAD(lx, double, 0.1) \
+    PAR_LOAD(ly, double, 0.1) \
+    \
+    PAR_LOAD(nx, int, 10) \
+    PAR_LOAD(ny, int, 10) \
+    \
+    PAR_LOAD(dx, double, lx / ((double)nx - 1)) \
+    PAR_LOAD(dy, double, lx / ((double)ny - 1)) \
+    \
+    PAR_LOAD(dt, double, 1e-7) \
+    PAR_LOAD(n_steps, int, 100) \
+    \
+    PAR_LOAD(mass, double, 2.1801714e-25) \
+    PAR_LOAD(sigma, double, 2 * 2.16e-10) \
+    PAR_LOAD(np_add, int, 1e3) \
+    PAR_LOAD(np_max, int, 1e5) \
+    PAR_LOAD(temperature, double, 300) \
+    PAR_LOAD(pw, double, 1e8)
+
+
+
 // TODO: Set parameters from a config file
 namespace DSMCpp {
     struct Parameters {
 
-        Parameters() = default;
+        #define PAR_LOAD(name, type, val) type name;
+        PAR_LOAD_ALL
+        #undef PAR_LOAD
 
-        // Geometry
-        double lx = 0.1;
-        double ly = 0.1;
-        int nx = 10;
-        int ny = 10;
-        double dx = lx / ((double)nx - 1);
-        double dy = ly / ((double)ny - 1);
-        
-        //Time
-        double dt = 1e-7;
-        int n_steps = 100;
-
-        //Species
-        double mass = 2.1801714e-25;
-        double sigma = 2 * 2.16e-10;
-        int np_add = 1e3;
-        int np_max = 1e5;
-        double temperature = 300;
-        double pw = 1e8;
+        Parameters() {
+            #define PAR_LOAD(name, type, val) name = val;
+            PAR_LOAD_ALL
+            #undef PAR_LOAD
+        };
     };
 
     class ParametricObj {
