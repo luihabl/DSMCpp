@@ -1,0 +1,24 @@
+{
+    "geometry":{
+        "lx": 0.1,
+        "ly": 0.1,
+        "nx": 10,
+        "ny": 10
+    },
+    "time": {
+        "dt": 1e-7,
+        "n_steps": 100
+    }, 
+    "species": {
+        "mass": 2.1801714e-25,
+        "sigma":  4.32e-10
+    }, 
+    "initial_conditions": {
+        "np_add": 1e3,
+        "temperature": 300
+    },
+    "sim_parameters": {
+        "pw": 1e8,
+        "np_max": 1e5
+    }
+}
