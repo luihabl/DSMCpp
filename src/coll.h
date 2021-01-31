@@ -3,6 +3,7 @@
 #include <par.h>
 #include <species.h>
 #include <unordered_map>
+// #include <llist.h>
 
 namespace DSMCpp {
 
@@ -16,8 +17,8 @@ namespace DSMCpp {
         
         private:
             void ntc_collisions(Species * s);
-            void isotropic_elastic_scattering(Species * s, int p1_index, int p2_index, double vr);
-
+            void isotropic_elastic_scattering(Species * s, const int & p1_index, const int & p2_index, const double & vr);
+            std::unordered_map<int, std::unordered_map<int, int>> cmap;
             double sigma_vr_max;
     };
 }

@@ -14,7 +14,7 @@
         "sigma":  4.32e-10
     }, 
     "initial_conditions": {
-        "np_add": 1e3,
+        "np_add": 1e5,
         "temperature": 300
     },
     "sim_parameters": {
