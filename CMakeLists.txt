@@ -29,12 +29,19 @@ FetchContent_Declare(json
     GIT_TAG v3.9.1
 )
 
-
 FetchContent_GetProperties(json)
 if(NOT json_POPULATED)
   FetchContent_MakeAvailable(json)
 endif()
 
+FetchContent_Declare(libnpy
+    GIT_REPOSITORY https://github.com/llohse/libnpy.git
+)
+
+FetchContent_GetProperties(libnpy)
+if(NOT libnpy_POPULATED)
+  FetchContent_MakeAvailable(libnpy)
+endif()
 
 target_link_libraries(DSMCpp PRIVATE 
                       nlohmann_json::nlohmann_json 
@@ -42,5 +49,5 @@ target_link_libraries(DSMCpp PRIVATE
 
 target_include_directories(DSMCpp PUBLIC 
                            "${CMAKE_CURRENT_SOURCE_DIR}/src"
-                          #  "${inih_SOURCE_DIR}"
+                           "${libnpy_SOURCE_DIR}"
                            )

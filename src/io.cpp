@@ -1,12 +1,16 @@
 #include <io.h>
-#include <nlohmann/json.hpp>
+#include <log.h>
+#include <matrix.h>
+
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include <matrix.h>
 #include <initializer_list>
-#include <log.h>
+#include <vector>
+
+#include <nlohmann/json.hpp>
+#include <npy.hpp>
 
 using namespace DSMCpp;
 
@@ -56,6 +60,9 @@ void Output::save_to_csv(std::string path,  TMatrix<T> & m, int nrows, int ncols
     file.close();
     Log::print("Data saved to " + path);
 }
+template void Output::save_to_csv(std::string path,  TMatrix<int> & m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<double> & m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<std::string> & m, int nrows, int ncols);
 
 template <class T>
 void Output::save_to_csv(std::string path,  TMatrix<T> && m, int nrows, int ncols) {
@@ -78,11 +85,24 @@ void Output::save_to_csv(std::string path,  TMatrix<T> && m, int nrows, int ncol
     file.close();
     Log::print("Data saved to " + path);
 }
-
 template void Output::save_to_csv(std::string path,  TMatrix<int> && m, int nrows, int ncols);
 template void Output::save_to_csv(std::string path,  TMatrix<double> && m, int nrows, int ncols);
 template void Output::save_to_csv(std::string path,  TMatrix<std::string> && m, int nrows, int ncols);
 
-template void Output::save_to_csv(std::string path,  TMatrix<int> & m, int nrows, int ncols);
-template void Output::save_to_csv(std::string path,  TMatrix<double> & m, int nrows, int ncols);
-template void Output::save_to_csv(std::string path,  TMatrix<std::string> & m, int nrows, int ncols);
+template <typename T> 
+void Output::save_to_npy(std::string path, TMatrix<T> && m) {
+    std::vector<T> data (m.m, m.m + (m.n1 * m.n2 * m.n3 ));
+    const long unsigned leshape [] = {m.n1, m.n2, m.n3};
+    npy::SaveArrayAsNumpy(path, false, 2, leshape, data);
+}
+template void Output::save_to_npy(std::string path, TMatrix<int> && m);
+template void Output::save_to_npy(std::string path, TMatrix<double> && m);
+
+template <typename T> 
+void Output::save_to_npy(std::string path, TMatrix<T> & m) {
+    std::vector<T> data (m.m, m.m + (m.n1 * m.n2 * m.n3 ));
+    const long unsigned leshape [] = {m.n1, m.n2, m.n3};
+    npy::SaveArrayAsNumpy(path, false, 2, leshape, data);
+}
+template void Output::save_to_npy(std::string path, TMatrix<int> & m);
+template void Output::save_to_npy(std::string path, TMatrix<double> & m);

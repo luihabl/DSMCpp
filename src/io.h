@@ -24,7 +24,8 @@ namespace DSMCpp {
     namespace Output {
         template <typename T> void save_to_csv(std::string path, TMatrix<T> && m, int nrows=-1, int ncols=-1); 
         template <typename T> void save_to_csv(std::string path, TMatrix<T> & m, int nrows=-1, int ncols=-1); 
-        void save_to_npy(std::string path, DoubleMat * m);
+        template <typename T> void save_to_npy(std::string path, TMatrix<T> && m);
+        template <typename T> void save_to_npy(std::string path, TMatrix<T> & m);
     }
 }
 

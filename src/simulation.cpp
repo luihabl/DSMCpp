@@ -38,5 +38,5 @@ void Simulation::iterate() {
 }
 
 void Simulation::save_state() {;
-    Output::save_to_csv("state.csv", s.get_state_vector(), s.np);
+    Output::save_to_npy("state.npy", s.get_state_vector());
 }
