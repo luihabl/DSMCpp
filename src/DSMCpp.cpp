@@ -11,10 +11,10 @@ int main() {
 
     ConfigFile config("../config.json");
     Parameters par(&config);    
-    // Simulation sim(&par);
+    Simulation sim(&par);
 
-    // sim.setup();
-    // sim.run();
+    sim.setup();
+    sim.run();
     
     return 0;
 }

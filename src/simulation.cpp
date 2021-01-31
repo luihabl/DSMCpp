@@ -6,6 +6,7 @@
 #include <bound.h>
 #include <coll.h>
 #include <iostream>
+#include <io.h>
 
 using namespace DSMCpp;
 
@@ -26,6 +27,7 @@ void Simulation::run() {
     Log::print("Starting main loop");
     while(step < par->n_steps) iterate();
     Log::print("Finished main loop");   
+    save_output();
 }
 
 void Simulation::iterate() {
@@ -33,4 +35,13 @@ void Simulation::iterate() {
     bound.collide(&s);
     coll.collide(&s);
     step += 1;
+}
+
+void Simulation::save_output() {
+    Output::save_to_csv("x.csv", &s.x, s.np);
+    Output::save_to_csv("y.csv", &s.y, s.np);
+    Output::save_to_csv("z.csv", &s.z, s.np);
+    Output::save_to_csv("vx.csv", &s.vx, s.np);
+    Output::save_to_csv("vy.csv", &s.vy, s.np);
+    Output::save_to_csv("vz.csv", &s.vz, s.np);
 }

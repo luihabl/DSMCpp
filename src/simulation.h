@@ -22,5 +22,7 @@ namespace DSMCpp {
             BoundaryHandler bound;
             CollisionHandler coll;
             int step;
+
+            void save_output();
     };
 }

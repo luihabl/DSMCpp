@@ -4,6 +4,7 @@
 #include <string>
 #include <log.h>
 #include <initializer_list>
+#include <matrix.h>
 
 namespace DSMCpp {
 
@@ -13,18 +14,17 @@ namespace DSMCpp {
         public: 
             ConfigFile() = default;
             ConfigFile(std::string path);
-
-            template <typename T>
-            inline T get(std::initializer_list<std::string> key_list) {
-                json j = file;
-                for (std::string key : key_list) j = j[key];
-                return j.get<T>();
-            }
-            
+            template <typename T> T get(std::initializer_list<std::string> key_list);
+        
         private:
             json file;
             void load_file(std::string path);
     };
+
+    namespace Output {
+        template <typename T> void save_to_csv(std::string path, TMatrix<T> * m, int nrows=-1, int ncols=-1); 
+        void save_to_npy(std::string path, DoubleMat * m);
+    }
 }
 
 
