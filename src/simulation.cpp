@@ -27,7 +27,7 @@ void Simulation::run() {
     Log::print("Starting main loop");
     while(step < par->n_steps) iterate();
     Log::print("Finished main loop");   
-    save_output();
+    save_state();
 }
 
 void Simulation::iterate() {
@@ -37,11 +37,6 @@ void Simulation::iterate() {
     step += 1;
 }
 
-void Simulation::save_output() {
-    Output::save_to_csv("x.csv", &s.x, s.np);
-    Output::save_to_csv("y.csv", &s.y, s.np);
-    Output::save_to_csv("z.csv", &s.z, s.np);
-    Output::save_to_csv("vx.csv", &s.vx, s.np);
-    Output::save_to_csv("vy.csv", &s.vy, s.np);
-    Output::save_to_csv("vz.csv", &s.vz, s.np);
+void Simulation::save_state() {;
+    Output::save_to_csv("state.csv", s.get_state_vector(), s.np);
 }

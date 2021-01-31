@@ -35,10 +35,10 @@ template std::string ConfigFile::get<std::string>(std::initializer_list<std::str
 // ---- Output
 
 template <class T>
-void Output::save_to_csv(std::string path,  TMatrix<T> * m, int nrows, int ncols) {
+void Output::save_to_csv(std::string path,  TMatrix<T> & m, int nrows, int ncols) {
 
-    nrows = nrows < 0 ? (int) m->n1 : nrows;
-    ncols = ncols < 0 ? (int) m->n2 : ncols;
+    nrows = nrows < 0 ? (int) m.n1 : nrows;
+    ncols = ncols < 0 ? (int) m.n2 : ncols;
 
     std::ofstream file(path);
     
@@ -46,7 +46,7 @@ void Output::save_to_csv(std::string path,  TMatrix<T> * m, int nrows, int ncols
         for (int j = 0; j < ncols; j++) {
             std::ostringstream stream_obj;
             stream_obj << std::setprecision(16);
-            stream_obj << m->m[i * m->n2 + j];
+            stream_obj << m.m[i * m.n2 + j];
             file << stream_obj.str();
             if (j != ncols - 1) file << ",";
         }
@@ -56,6 +56,33 @@ void Output::save_to_csv(std::string path,  TMatrix<T> * m, int nrows, int ncols
     file.close();
     Log::print("Data saved to " + path);
 }
-template void Output::save_to_csv(std::string path,  TMatrix<int> * m, int nrows, int ncols);
-template void Output::save_to_csv(std::string path,  TMatrix<double> * m, int nrows, int ncols);
-template void Output::save_to_csv(std::string path,  TMatrix<std::string> * m, int nrows, int ncols);
+
+template <class T>
+void Output::save_to_csv(std::string path,  TMatrix<T> && m, int nrows, int ncols) {
+    nrows = nrows < 0 ? (int) m.n1 : nrows;
+    ncols = ncols < 0 ? (int) m.n2 : ncols;
+
+    std::ofstream file(path);
+    
+    for (int i = 0; i < nrows; i++) {  
+        for (int j = 0; j < ncols; j++) {
+            std::ostringstream stream_obj;
+            stream_obj << std::setprecision(16);
+            stream_obj << m.m[i * m.n2 + j];
+            file << stream_obj.str();
+            if (j != ncols - 1) file << ",";
+        }
+        file << endl;
+    }
+    
+    file.close();
+    Log::print("Data saved to " + path);
+}
+
+template void Output::save_to_csv(std::string path,  TMatrix<int> && m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<double> && m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<std::string> && m, int nrows, int ncols);
+
+template void Output::save_to_csv(std::string path,  TMatrix<int> & m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<double> & m, int nrows, int ncols);
+template void Output::save_to_csv(std::string path,  TMatrix<std::string> & m, int nrows, int ncols);

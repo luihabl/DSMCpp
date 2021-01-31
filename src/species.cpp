@@ -23,6 +23,19 @@ Species::Species(Parameters * _par) : ParametricObj(_par) {
 
 }
 
+DoubleMat Species::get_state_vector() {
+	DoubleMat state_vector = DoubleMat::zeros(np, 6);
+    for (int i=0; i<np; i++){
+        state_vector.m[i * 6 + 0] = x.m[i];
+        state_vector.m[i * 6 + 1] = y.m[i];
+        state_vector.m[i * 6 + 2] = z.m[i];
+        state_vector.m[i * 6 + 3] = vx.m[i];
+        state_vector.m[i * 6 + 4] = vy.m[i];
+        state_vector.m[i * 6 + 5] = vz.m[i];
+    }
+	return state_vector;
+}
+
 void Species::add_n_uniform_uniform(int n, double vmin, double vmax) {
 	double lx = par->lx;
 	double ly = par->ly;

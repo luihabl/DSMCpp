@@ -23,6 +23,6 @@ namespace DSMCpp {
             CollisionHandler coll;
             int step;
 
-            void save_output();
+            void save_state();
     };
 }
