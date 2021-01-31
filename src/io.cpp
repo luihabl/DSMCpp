@@ -93,7 +93,8 @@ template <typename T>
 void Output::save_to_npy(std::string path, TMatrix<T> && m) {
     std::vector<T> data (m.m, m.m + (m.n1 * m.n2 * m.n3 ));
     const long unsigned leshape [] = {m.n1, m.n2, m.n3};
-    npy::SaveArrayAsNumpy(path, false, 2, leshape, data);
+    int ndim = 3 - (m.n3 < 2) - (m.n2 < 2) - (m.n1 < 2);
+    npy::SaveArrayAsNumpy(path, false, ndim, leshape, data);
 }
 template void Output::save_to_npy(std::string path, TMatrix<int> && m);
 template void Output::save_to_npy(std::string path, TMatrix<double> && m);

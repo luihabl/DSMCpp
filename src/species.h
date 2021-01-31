@@ -2,8 +2,6 @@
 
 #include <matrix.h>
 #include <par.h>
-#include <llist.h>
-#include <unordered_map>
 
 namespace DSMCpp {
     class Species : ParametricObj {
@@ -24,6 +22,5 @@ namespace DSMCpp {
             
             DoubleMat x, y, z;
             DoubleMat vx, vy, vz;
-            std::unordered_map<int, LinkedList<int>> cmap;
     };
 }
