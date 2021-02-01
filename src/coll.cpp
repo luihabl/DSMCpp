@@ -8,7 +8,7 @@
 
 #include <log.h>
 #include <chrono>
-#include <cstdlib>
+// #include <cstdlib>
 
 using namespace DSMCpp;
 
@@ -71,10 +71,10 @@ void CollisionHandler::ntc_collisions(Species * s) {
         
         for(int i=0; i<nc; i++) {
 
-            // p1_cmap_index = floor(np_cell * Random::rand());
-            p1_cmap_index = rand() % (int) np_cell;
-            // do {p2_cmap_index = floor(np_cell * Random::rand());}
-            do {p2_cmap_index = rand() % (int) np_cell;}
+            p1_cmap_index = floor(np_cell * Random::rand());
+            // p1_cmap_index = rand() % (int) np_cell;
+            do {p2_cmap_index = floor(np_cell * Random::rand());}
+            // do {p2_cmap_index = rand() % (int) np_cell;}
             while(p1_cmap_index==p2_cmap_index);
 
             // p1_index = cell.second.at(p1_cmap_index);
