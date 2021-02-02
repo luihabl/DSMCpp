@@ -9,5 +9,6 @@ namespace DSMCpp {
         double rand(double v0, double v1);
         double randn();
         double randn(double mu, double sigma);
+        int rand_int(float v0, float v1);
     }
 }

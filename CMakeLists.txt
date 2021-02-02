@@ -7,7 +7,7 @@ set(FETCHCONTENT_QUIET OFF)
 # C++ version
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "-O3 -Wall")
+set(CMAKE_CXX_FLAGS "-O3 -march=native -Wall")
 
 # add the executable
 add_executable(DSMCpp 

@@ -13,7 +13,7 @@
 using namespace DSMCpp;
 
 CollisionHandler::CollisionHandler(Parameters * _par) : ParametricObj(_par) {
-    sigma_vr_max = par->sigma * 10 * sqrt(Const::k_boltz * par->temperature / par->mass);
+    sigma_vr_max = par->sigma * 2 * sqrt(Const::k_boltz * par->temperature / par->mass);
 }
 
 void CollisionHandler::update_map(Species * s) {
@@ -27,16 +27,7 @@ void CollisionHandler::update_map(Species * s) {
     for (int i=0; i<s->np; i++) {
         cx = (int) floor(s->x.m[i] / dx);
         cy = (int) floor(s->y.m[i] / dy);
-        // try { s->cmap[cx * ny + cy].add(i); }
-        // catch (int e) {
-        //     s->cmap[cx * ny + cy] = LinkedList<int>();
-        //     s->cmap[cx * ny + cy].add(i);
-        // }
-        // if (cmap.count(cx * ny + cy) == 0) cmap[cx * ny + cy] = LinkedList<int>();
-        // cmap[cx * ny + cy].add(i);
-        int s = cmap[cx * ny + cy].size();
-        cmap[cx * ny + cy][s] = i;
-
+        cmap[cx * ny + cy].push_back(i);
     }
 
 }
@@ -56,6 +47,7 @@ void CollisionHandler::ntc_collisions(Species * s) {
     double sigma_vr, sigma_vr_max_tmp=sigma_vr_max;
 
     int p1_index, p1_cmap_index, p2_index, p2_cmap_index;
+    double v1x, v1y, v1z, v2x, v2y, v2z;
     double vrx, vry, vrz, vr;
 
     double nc_ntc, np_cell; 
@@ -71,28 +63,33 @@ void CollisionHandler::ntc_collisions(Species * s) {
         
         for(int i=0; i<nc; i++) {
 
-            p1_cmap_index = floor(np_cell * Random::rand());
-            // p1_cmap_index = rand() % (int) np_cell;
-            do {p2_cmap_index = floor(np_cell * Random::rand());}
-            // do {p2_cmap_index = rand() % (int) np_cell;}
+            p1_cmap_index = Random::rand_int(0, np_cell);
+            do {p2_cmap_index = Random::rand_int(0, np_cell);}
             while(p1_cmap_index==p2_cmap_index);
 
-            // p1_index = cell.second.at(p1_cmap_index);
-            // p2_index = cell.second.at(p2_cmap_index);
+            p1_index = cell.second[p1_cmap_index];
+            p2_index = cell.second[p2_cmap_index];
 
-            // vrx = s->vx.m[p1_index] - s->vx.m[p2_index];
-            // vry = s->vy.m[p1_index] - s->vy.m[p2_index];
-            // vrz = s->vz.m[p1_index] - s->vz.m[p2_index];
-            // vr = sqrt(vrx*vrx + vry*vry + vrz*vrz);
+            v1x = s->vx.m[p1_index];
+            v1y = s->vy.m[p1_index]; 
+            v1z = s->vz.m[p1_index];
+            v2x = s->vx.m[p2_index];
+            v2y = s->vy.m[p2_index]; 
+            v2z = s->vz.m[p2_index];
 
-            // sigma_vr = sigma * vr;
-            // sigma_vr_max_tmp = sigma_vr > sigma_vr_max_tmp ? sigma_vr : sigma_vr_max_tmp;
+            vrx = v1x - v2x;
+            vry = v1y - v2y;
+            vrz = v1z - v2z;
+            vr = sqrt(vrx*vrx + vry*vry + vrz*vrz);
 
-            // double rand = Random::rand();
-            // if ((sigma_vr / sigma_vr_max) > rand) {
-            //     isotropic_elastic_scattering(s, p1_index, p2_index, vr);
-            //     n_coll++;
-            // }
+            sigma_vr = sigma * vr;
+            sigma_vr_max_tmp = sigma_vr > sigma_vr_max_tmp ? sigma_vr : sigma_vr_max_tmp;
+
+            double rand = Random::rand();
+            if ((sigma_vr / sigma_vr_max) > rand) {
+                isotropic_elastic_scattering(s, p1_index, p2_index, vr, v1x, v1y, v1z, v2x, v2y, v2z);
+                n_coll++;
+            }
         }
 
         if(n_coll>0) sigma_vr_max = sigma_vr_max_tmp;
@@ -102,9 +99,11 @@ void CollisionHandler::ntc_collisions(Species * s) {
     std::cout << "It took me " << time_span.count() << " milliseconds." << std::endl;
 }
 
-void CollisionHandler::isotropic_elastic_scattering(Species * s, const int & p1_index, const int & p2_index, const double & vr) {
+void CollisionHandler::isotropic_elastic_scattering(Species * s, const int & p1_index, const int & p2_index, const double & vr, 
+        const double & v1x, const double & v1y, const double & v1z,
+        const double & v2x, const double & v2y, const double & v2z) {
     
-    double phi = 2 * M_PI * Random::rand(); 
+    double phi = 2 * Const::pi * Random::rand(); 
     double cos_theta = 2 * Random::rand() - 1;
     double sin_theta = sqrt(1 - cos_theta * cos_theta); 
 
@@ -112,9 +111,9 @@ void CollisionHandler::isotropic_elastic_scattering(Species * s, const int & p1_
     double vry2 = vr * sin_theta * cos(phi);
     double vrz2 = vr * sin_theta * sin(phi); 
 
-    double vcmx = 0.5 * (s->vx.m[p1_index] + s->vx.m[p2_index]);
-    double vcmy = 0.5 * (s->vy.m[p1_index] + s->vy.m[p2_index]);
-    double vcmz = 0.5 * (s->vz.m[p1_index] + s->vz.m[p2_index]);
+    double vcmx = 0.5 * (v1x + v2x);
+    double vcmy = 0.5 * (v1y + v2y);
+    double vcmz = 0.5 * (v1z + v2z);
 
     s->vx.m[p1_index] = vcmx + 0.5 * vrx2;
     s->vy.m[p1_index] = vcmy + 0.5 * vry2;
