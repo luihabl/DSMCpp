@@ -2,18 +2,18 @@
 #include <species.h>
 #include <unordered_map>
 #include <math.h>
-// #include <llist.h>
+#include <num.h>
 #include <const.h>
 #include <rand.h>
 
 #include <log.h>
 #include <chrono>
-// #include <cstdlib>
 
 using namespace DSMCpp;
 
 CollisionHandler::CollisionHandler(Parameters * _par) : ParametricObj(_par) {
     sigma_vr_max = par->sigma * 2 * sqrt(Const::k_boltz * par->temperature / par->mass);
+    TableTrig::init();
 }
 
 void CollisionHandler::update_map(Species * s) {
@@ -80,7 +80,7 @@ void CollisionHandler::ntc_collisions(Species * s) {
             vrx = v1x - v2x;
             vry = v1y - v2y;
             vrz = v1z - v2z;
-            vr = sqrt(vrx*vrx + vry*vry + vrz*vrz);
+            vr = sqrtf(vrx*vrx + vry*vry + vrz*vrz);
 
             sigma_vr = sigma * vr;
             sigma_vr_max_tmp = sigma_vr > sigma_vr_max_tmp ? sigma_vr : sigma_vr_max_tmp;
@@ -105,11 +105,11 @@ void CollisionHandler::isotropic_elastic_scattering(Species * s, const int & p1_
     
     double phi = 2 * Const::pi * Random::rand(); 
     double cos_theta = 2 * Random::rand() - 1;
-    double sin_theta = sqrt(1 - cos_theta * cos_theta); 
+    double sin_theta = sqrtf(1 - cos_theta * cos_theta); 
 
     double vrx2 = vr * cos_theta;
-    double vry2 = vr * sin_theta * cos(phi);
-    double vrz2 = vr * sin_theta * sin(phi); 
+    double vry2 = vr * sin_theta * TableTrig::fcos(phi);
+    double vrz2 = vr * sin_theta * TableTrig::fsin(phi); 
 
     double vcmx = 0.5 * (v1x + v2x);
     double vcmy = 0.5 * (v1y + v2y);

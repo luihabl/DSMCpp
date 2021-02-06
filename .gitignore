@@ -36,3 +36,5 @@ build/
 
 # Editor folder
 .vscode/
+.vs/
+out/

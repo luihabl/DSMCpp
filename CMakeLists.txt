@@ -7,21 +7,37 @@ set(FETCHCONTENT_QUIET OFF)
 # C++ version
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "-O3 -march=native -Wall")
+
+if (WIN32)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /O3 /W4")
+else()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -Wall")
+endif()
 
 # add the executable
-add_executable(DSMCpp 
-
-    src/DSMCpp.cpp 
-    src/log.cpp
-    src/rand.cpp
-    src/species.cpp
-    src/simulation.cpp
-    src/bound.cpp
-    src/mesh.cpp
-    src/coll.cpp
-    src/io.cpp
-
+add_executable(DSMCpp        
+    src/bound.cpp      
+    src/bound.h        
+    src/coll.cpp       
+    src/coll.h         
+    src/const.h        
+    src/DSMCpp.cpp     
+    src/io.cpp         
+    src/io.h           
+    src/llist.h        
+    src/log.cpp        
+    src/log.h          
+    src/matrix.h       
+    src/mesh.cpp       
+    src/mesh.h         
+    src/num.h          
+    src/par.h          
+    src/rand.cpp       
+    src/rand.h         
+    src/simulation.cpp 
+    src/simulation.h   
+    src/species.cpp    
+    src/species.h      
 )
 
 FetchContent_Declare(json
