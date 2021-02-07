@@ -5,9 +5,8 @@
 #include <num.h>
 #include <const.h>
 #include <rand.h>
-
 #include <log.h>
-#include <chrono>
+
 
 using namespace DSMCpp;
 
@@ -37,7 +36,7 @@ void CollisionHandler::collide(Species * s) {
     ntc_collisions(s);
 }
 
-using namespace std::chrono;
+
 void CollisionHandler::ntc_collisions(Species * s) {
         
     const double vc = par->dx * par->dy;
@@ -52,8 +51,6 @@ void CollisionHandler::ntc_collisions(Species * s) {
 
     double nc_ntc, np_cell; 
     int nc, n_coll;
-
-    high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
     for (auto const& cell : cmap) {
         n_coll = 0;
@@ -94,9 +91,6 @@ void CollisionHandler::ntc_collisions(Species * s) {
 
         if(n_coll>0) sigma_vr_max = sigma_vr_max_tmp;
     }
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    duration<double, std::milli> time_span = t2 - t1;
-    std::cout << "It took me " << time_span.count() << " milliseconds." << std::endl;
 }
 
 void CollisionHandler::isotropic_elastic_scattering(Species * s, const int & p1_index, const int & p2_index, const double & vr, 

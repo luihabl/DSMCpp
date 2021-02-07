@@ -24,5 +24,6 @@ namespace DSMCpp {
             int step;
 
             void save_state();
+            void print_loop_info(double loop_time);
     };
 }

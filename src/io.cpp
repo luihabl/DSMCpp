@@ -29,7 +29,7 @@ ConfigFile::ConfigFile(std::string default_path, int argc, char *argv[]) {
         Log::error("Error when loading config file: " + path);
         exit(1);
     }
-    
+    Log::error("Config file loaded: " + path);   
 }
 
 void ConfigFile::load_file(std::string path) {
@@ -107,6 +107,7 @@ void Output::save_to_npy(std::string path, TMatrix<T> && m) {
     const long unsigned leshape [] = {m.n1, m.n2, m.n3};
     int ndim = 3 - (m.n3 < 2) - (m.n2 < 2) - (m.n1 < 2);
     npy::SaveArrayAsNumpy(path, false, ndim, leshape, data);
+    Log::print("Data saved to " + path);
 }
 template void Output::save_to_npy(std::string path, TMatrix<int> && m);
 template void Output::save_to_npy(std::string path, TMatrix<double> && m);
@@ -116,6 +117,7 @@ void Output::save_to_npy(std::string path, TMatrix<T> & m) {
     std::vector<T> data (m.m, m.m + (m.n1 * m.n2 * m.n3 ));
     const long unsigned leshape [] = {m.n1, m.n2, m.n3};
     npy::SaveArrayAsNumpy(path, false, 2, leshape, data);
+    Log::print("Data saved to " + path);
 }
 template void Output::save_to_npy(std::string path, TMatrix<int> & m);
 template void Output::save_to_npy(std::string path, TMatrix<double> & m);
