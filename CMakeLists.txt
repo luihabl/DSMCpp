@@ -9,19 +9,19 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (WIN32)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /O3 /W4")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /O2")
 else()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -Wall")
 endif()
 
 # add the executable
-add_executable(DSMCpp        
+add_executable(DSMCpp    
+    src/DSMCpp.cpp        
     src/bound.cpp      
     src/bound.h        
     src/coll.cpp       
     src/coll.h         
     src/const.h        
-    src/DSMCpp.cpp     
     src/io.cpp         
     src/io.h           
     src/llist.h        

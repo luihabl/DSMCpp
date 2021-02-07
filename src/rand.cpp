@@ -6,8 +6,7 @@ using namespace DSMCpp;
 
 namespace {
     random_device r;
-    seed_seq seed{ r() };
-    mt19937 gen{ seed };
+    mt19937 gen(r());
 
     uniform_real_distribution<float> uniform(0.0, 1.0);
     normal_distribution<float> normal(0.0, 1.0);
