@@ -60,8 +60,8 @@ void CollisionHandler::ntc_collisions(Species * s) {
         
         for(int i=0; i<nc; i++) {
 
-            p1_cmap_index = Random::rand_int(0, np_cell);
-            do {p2_cmap_index = Random::rand_int(0, np_cell);}
+            p1_cmap_index = Random::rand_int_zero(np_cell);
+            do {p2_cmap_index = Random::rand_int_zero(np_cell);}
             while(p1_cmap_index==p2_cmap_index);
 
             p1_index = cell.second[p1_cmap_index];
