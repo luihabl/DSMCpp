@@ -40,8 +40,12 @@ void Simulation::iterate() {
     print_loop_info(time_span.count());
 }
 
-void Simulation::save_state() {;
+void Simulation::save_state() {
+    #ifdef NPY_OUTPUT
     Output::save_to_npy("state.npy", s.get_state_vector());
+    #else
+    Output::save_to_csv("state.csv", s.get_state_vector());
+    #endif
 }
 
 void Simulation::print_loop_info(double loop_time) {

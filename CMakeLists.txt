@@ -70,3 +70,4 @@ target_include_directories(DSMCpp PUBLIC
 
 
 add_compile_definitions(DEFAULT_CONFIG_PATH="../config.json")
+add_compile_definitions(NPY_OUTPUT)
