@@ -67,3 +67,6 @@ target_include_directories(DSMCpp PUBLIC
                            "${CMAKE_CURRENT_SOURCE_DIR}/src"
                            "${libnpy_SOURCE_DIR}"
                            )
+
+
+add_compile_definitions(DEFAULT_CONFIG_PATH="../config.json")

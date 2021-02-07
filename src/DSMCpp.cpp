@@ -6,10 +6,14 @@
 using namespace std;
 using namespace DSMCpp;
 
-int main() {
-    Log::print("Starting DSMCpp");
+#ifndef DEFAULT_CONFIG_PATH
+#define DEFAULT_CONFIG_PATH "config.json"
+#endif
 
-    ConfigFile config("../config.json");
+int main(int argc, char *argv[]) {
+    Log::print("Starting DSMCpp");
+    
+    ConfigFile config(DEFAULT_CONFIG_PATH, argc, argv);
     Parameters par(&config);    
     Simulation sim(&par);
 

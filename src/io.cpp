@@ -9,6 +9,8 @@
 #include <initializer_list>
 #include <vector>
 
+#include <iostream>
+
 #include <nlohmann/json.hpp>
 #include <npy.hpp>
 
@@ -16,8 +18,18 @@ using namespace DSMCpp;
 
 // ---- ConfigFile
 
-ConfigFile::ConfigFile(std::string path) {
-    load_file(path);
+ConfigFile::ConfigFile(std::string default_path, int argc, char *argv[]) {
+
+    std::string path = default_path;
+    if (argc > 1) path = argv[1];
+
+    try {
+        load_file(path);
+    } catch (const std::exception& e) {
+        Log::error("Error when loading config file: " + path);
+        exit(1);
+    }
+    
 }
 
 void ConfigFile::load_file(std::string path) {

@@ -13,7 +13,7 @@ namespace DSMCpp {
         
         public: 
             ConfigFile() = default;
-            ConfigFile(std::string path);
+            ConfigFile(std::string default_path, int argc, char *argv[]);
             template <typename T> T get(std::initializer_list<std::string> key_list);
         
         private:
