@@ -7,6 +7,7 @@
 #include <bound.h>
 #include <coll.h>
 #include <io.h>
+#include <const.h>
 
 using namespace DSMCpp;
 using namespace std::chrono;
@@ -14,7 +15,8 @@ using namespace std::chrono;
 void Simulation::setup() {
     step = 0;
     s = Species(par); //Add TMatrix<Species> afterwards
-    s.add_n_uniform_maxwellian(par->np_add, par->temperature);
+    // s.add_n_uniform_maxwellian(par->np_add, par->temperature);
+    s.add_n_uniform_equal(par->np_add, par->temperature * (3 * Const::k_boltz / (2 * Const::e)));
     bound = BoundaryHandler(par);
     mesh = Mesh(par);
     coll = CollisionHandler(par);

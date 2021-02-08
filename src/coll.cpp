@@ -6,6 +6,7 @@
 #include <const.h>
 #include <rand.h>
 #include <log.h>
+#include <vector>
 
 
 using namespace DSMCpp;
@@ -45,39 +46,48 @@ void CollisionHandler::ntc_collisions(Species * s) {
     const double sigma = par->sigma;
     double sigma_vr, sigma_vr_max_tmp=sigma_vr_max;
 
-    int p1_index, p1_cmap_index, p2_index, p2_cmap_index;
-    double v1x, v1y, v1z, v2x, v2y, v2z;
-    double vrx, vry, vrz, vr;
+    int cmap_size = cmap.size();
+    IntMat keys(cmap_size);
+    int i = 0;
+    for (auto const& cell : cmap){
+        keys.m[i] = cell.first;
+        i += 1;
+    }
 
-    double nc_ntc, np_cell; 
-    int nc, n_coll;
+    for (int j=0; j < cmap_size; j++) {
+        
+        int p1_cmap_index, p2_cmap_index;
 
-    for (auto const& cell : cmap) {
-        n_coll = 0;
-        np_cell = cell.second.size();
-        nc_ntc =  0.5 * np_cell * (np_cell - 1) * pw * sigma_vr_max * dt / vc;
-        nc = floor(nc_ntc + 0.5);
+        std::vector<int> *cell = &cmap[keys.m[j]];
+
+        int n_coll = 0;
+        double np_cell = cell->size();
+        double nc_ntc =  0.5 * np_cell * (np_cell - 1) * pw * sigma_vr_max * dt / vc;
+        int nc = floor(nc_ntc + 0.5);
         
         for(int i=0; i<nc; i++) {
+
+            p1_cmap_index = 0;
+            p2_cmap_index = 0;
 
             p1_cmap_index = Random::rand_int_zero(np_cell);
             do {p2_cmap_index = Random::rand_int_zero(np_cell);}
             while(p1_cmap_index==p2_cmap_index);
 
-            p1_index = cell.second[p1_cmap_index];
-            p2_index = cell.second[p2_cmap_index];
+            int p1_index = (*cell)[p1_cmap_index];
+            int p2_index = (*cell)[p2_cmap_index];
 
-            v1x = s->vx.m[p1_index];
-            v1y = s->vy.m[p1_index]; 
-            v1z = s->vz.m[p1_index];
-            v2x = s->vx.m[p2_index];
-            v2y = s->vy.m[p2_index]; 
-            v2z = s->vz.m[p2_index];
+            double v1x = s->vx.m[p1_index];
+            double v1y = s->vy.m[p1_index]; 
+            double v1z = s->vz.m[p1_index];
+            double v2x = s->vx.m[p2_index];
+            double v2y = s->vy.m[p2_index]; 
+            double v2z = s->vz.m[p2_index];
 
-            vrx = v1x - v2x;
-            vry = v1y - v2y;
-            vrz = v1z - v2z;
-            vr = sqrtf(vrx*vrx + vry*vry + vrz*vrz);
+            double vrx = v1x - v2x;
+            double vry = v1y - v2y;
+            double vrz = v1z - v2z;
+            double vr = sqrtf(vrx*vrx + vry*vry + vrz*vrz);
 
             sigma_vr = sigma * vr;
             sigma_vr_max_tmp = sigma_vr > sigma_vr_max_tmp ? sigma_vr : sigma_vr_max_tmp;

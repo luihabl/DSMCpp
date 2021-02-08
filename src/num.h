@@ -13,7 +13,7 @@ using namespace DSMCpp;
 
 namespace TableTrig{
 
-   DoubleMat cossin_table = DoubleMat::zeros(MAX_CIRCLE_ANGLE);
+   static DoubleMat cossin_table = DoubleMat::zeros(MAX_CIRCLE_ANGLE);
 
    inline void init() {
       for (int i = 0 ; i < MAX_CIRCLE_ANGLE ; i++) {

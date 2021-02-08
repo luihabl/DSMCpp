@@ -14,6 +14,7 @@ namespace DSMCpp {
             void move();
             void add_n_uniform_uniform(int n, double vmin, double vmax);
             void add_n_uniform_maxwellian(int n, double temperature);
+            void add_n_uniform_equal(int n, double energy);
             DoubleMat get_state_vector();
             
             int np; //number of active particles

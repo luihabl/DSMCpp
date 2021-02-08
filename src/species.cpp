@@ -70,6 +70,24 @@ void Species::add_n_uniform_maxwellian(int n, double temperature) {
 	np += n;
 }
 
+void Species::add_n_uniform_equal(int n, double energy) {
+    
+    double v = sqrt(2 * energy * Const::e / (2 * mass));
+	double lx = par->lx;
+	double ly = par->ly;
+
+	for (int i = np; i < np + n; i++)
+	{
+		x.m[i]  = lx * Random::rand();
+		y.m[i]  = ly * Random::rand();
+		z.m[i]  = 0.0;
+		vx.m[i] = v;
+		vy.m[i] = v;
+		vz.m[i] = 0;
+	}
+	np += n;
+}
+
 void Species::move() {
 	double dt = par->dt;
 	for (int i = 0; i < np; i++) {

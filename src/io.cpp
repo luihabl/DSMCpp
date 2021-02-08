@@ -29,7 +29,7 @@ ConfigFile::ConfigFile(std::string default_path, int argc, char *argv[]) {
         Log::error("Error when loading config file: " + path);
         exit(1);
     }
-    Log::error("Config file loaded: " + path);   
+    Log::print("Config file loaded: " + path);   
 }
 
 void ConfigFile::load_file(std::string path) {
