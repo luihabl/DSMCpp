@@ -1,10 +1,13 @@
 #pragma once
 #include <random>
+namespace mt {
+    #include <mersenne-twister.h>
+}
 
 using namespace std;
 
 namespace DSMCpp {
-    namespace Random {
+    namespace RandomCPP {
 
         namespace {
             static random_device r;
@@ -37,6 +40,27 @@ namespace DSMCpp {
         inline float randn(float mu, float sigma){
             return sigma * normal(gen) + mu; 
         }
-
     }
+
+    namespace Random {
+        inline void init(uint32_t s) {
+            mt::seed(s);
+        }
+        
+        inline double rand() {
+            return (double)mt::rand_u32() / (double)UINT32_MAX;
+        }
+
+        inline double rand(double v0, double v1){
+            return (v1 - v0) * ((double)mt::rand_u32() / (double)UINT32_MAX) + v0; 
+        }
+
+        inline int rand_int_zero(int vmax) {
+            return mt::rand_u32() % (vmax + 1);
+        }
+        
+    }
+
+
+
 }

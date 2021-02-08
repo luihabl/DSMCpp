@@ -20,7 +20,8 @@
     PAR_LOAD(np_add, int, "initial_conditions", "np_add") \
     PAR_LOAD(temperature, double, "initial_conditions", "temperature") \
     PAR_LOAD(np_max, int, "sim_parameters", "np_max") \
-    PAR_LOAD(pw, double, "sim_parameters", "pw") 
+    PAR_LOAD(pw, double, "sim_parameters", "pw") \
+    PAR_LOAD(seed, int, "sim_parameters", "seed")
 
 // TODO: Set parameters from a config file
 namespace DSMCpp {

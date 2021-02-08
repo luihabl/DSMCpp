@@ -8,11 +8,16 @@
 #include <coll.h>
 #include <io.h>
 #include <const.h>
+#include <rand.h>
+#include <num.h>
 
 using namespace DSMCpp;
 using namespace std::chrono;
 
 void Simulation::setup() {
+    
+    Random::init(par->seed);
+    
     step = 0;
     s = Species(par); //Add TMatrix<Species> afterwards
     // s.add_n_uniform_maxwellian(par->np_add, par->temperature);
@@ -20,6 +25,8 @@ void Simulation::setup() {
     bound = BoundaryHandler(par);
     mesh = Mesh(par);
     coll = CollisionHandler(par);
+
+    TableTrig::init();
 }
 
 void Simulation::run() {

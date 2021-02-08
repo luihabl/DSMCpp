@@ -14,32 +14,6 @@ else()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -Wall")
 endif()
 
-# add the executable
-add_executable(DSMCpp    
-    src/DSMCpp.cpp        
-    src/bound.cpp      
-    src/bound.h        
-    src/coll.cpp       
-    src/coll.h         
-    src/const.h        
-    src/io.cpp         
-    src/io.h           
-    src/llist.h        
-    src/log.cpp        
-    src/log.h          
-    src/matrix.h       
-    src/mesh.cpp       
-    src/mesh.h         
-    src/num.h          
-    src/par.h          
-    src/rand.cpp       
-    src/rand.h         
-    src/simulation.cpp 
-    src/simulation.h   
-    src/species.cpp    
-    src/species.h      
-)
-
 FetchContent_Declare(json
     GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent.git
     GIT_TAG v3.9.1
@@ -59,15 +33,57 @@ if(NOT libnpy_POPULATED)
   FetchContent_MakeAvailable(libnpy)
 endif()
 
+
+
+FetchContent_Declare(mt
+    GIT_REPOSITORY https://github.com/cslarsen/mersenne-twister.git
+)
+
+FetchContent_GetProperties(mt)
+if(NOT mt_POPULATED)
+  FetchContent_MakeAvailable(mt)
+endif()
+
+# find_package(OpenMP)
+# if(OpenMP_CXX_FOUND)
+#     target_link_libraries(DSMCpp PUBLIC OpenMP::OpenMP_CXX)
+# endif()
+
+# add the executable
+add_executable(DSMCpp    
+src/DSMCpp.cpp        
+src/bound.cpp      
+src/bound.h        
+src/coll.cpp       
+src/coll.h         
+src/const.h        
+src/io.cpp         
+src/io.h           
+src/llist.h        
+src/log.cpp        
+src/log.h          
+src/matrix.h       
+src/mesh.cpp       
+src/mesh.h         
+src/num.h          
+src/par.h                
+src/rand.h         
+src/simulation.cpp 
+src/simulation.h   
+src/species.cpp    
+src/species.h    
+${mt_SOURCE_DIR}/mersenne-twister.cpp  
+)
+
 target_link_libraries(DSMCpp PRIVATE 
-                      nlohmann_json::nlohmann_json 
-                      )
+  nlohmann_json::nlohmann_json 
+)
 
 target_include_directories(DSMCpp PUBLIC 
-                           "${CMAKE_CURRENT_SOURCE_DIR}/src"
-                           "${libnpy_SOURCE_DIR}"
-                           )
-
+"${CMAKE_CURRENT_SOURCE_DIR}/src"
+"${libnpy_SOURCE_DIR}"
+"${mt_SOURCE_DIR}"
+)
 
 add_compile_definitions(DEFAULT_CONFIG_PATH="../config.json")
 add_compile_definitions(NPY_OUTPUT)
