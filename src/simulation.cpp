@@ -58,5 +58,6 @@ void Simulation::save_state() {
 }
 
 void Simulation::print_loop_info(double loop_time) {
-    Log::print("Step: " + to_string(step) + "/" + to_string(par->n_steps) + " Loop time: " + to_string(loop_time) + " ms");
+    if (step % 100 == 0) 
+        Log::print("Step: " + to_string(step) + "/" + to_string(par->n_steps) + " Loop time: " + to_string(loop_time) + " ms");
 }
