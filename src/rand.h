@@ -7,7 +7,7 @@ namespace mt {
 using namespace std;
 
 namespace DSMCpp {
-    namespace RandomCPP {
+    namespace RandomCpp {
 
         namespace {
             static random_device r;

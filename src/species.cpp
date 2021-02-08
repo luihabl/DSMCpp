@@ -63,9 +63,9 @@ void Species::add_n_uniform_maxwellian(int n, double temperature) {
 		x.m[i]  = lx * Random::rand();
 		y.m[i]  = ly * Random::rand();
 		z.m[i]  = 0.0;
-		vx.m[i] = RandomCPP::randn(0.0, v_temperature);
-		vy.m[i] = RandomCPP::randn(0.0, v_temperature);
-		vz.m[i] = RandomCPP::randn(0.0, v_temperature);
+		vx.m[i] = RandomCpp::randn(0.0, v_temperature);
+		vy.m[i] = RandomCpp::randn(0.0, v_temperature);
+		vz.m[i] = RandomCpp::randn(0.0, v_temperature);
 	}
 	np += n;
 }
