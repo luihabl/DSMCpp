@@ -5,7 +5,7 @@ Simple DSMC simulation code written in C++.
 You need C++11+ and CMake 3.12+. To build, you can run the common CMake commands from the project's root:
 
 ```
-mkdir build & cd build
+mkdir build && cd build
 cmake ..
 cmake --build .
 ```
