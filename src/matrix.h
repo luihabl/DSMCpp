@@ -263,7 +263,7 @@ TMatrix<T> TMatrix<T>::getnewbox(int ilower, int jlower, int iupper, int jupper)
 	{
 		for (int j = 0; j < jupper - jlower + 1; j++)
 		{
-			n.m[i * m.n2 + j] = m[(i + ilower) * n2 + (j + jlower)];
+			n.m[i * n.n2 + j] = m[(i + ilower) * n2 + (j + jlower)];
 		}
 	}
 	return m;
